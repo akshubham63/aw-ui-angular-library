@@ -1,0 +1,58 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "aw-ui-angular-library": {
+      "projectType": "library",
+      "root": "projects/aw-ui-angular-library",
+      "sourceRoot": "projects/aw-ui-angular-library/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/aw-ui-angular-library/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/aw-ui-angular-library/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/aw-ui-angular-library/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/aw-ui-angular-library/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": "projects/aw-ui-angular-library/.storybook",
+            "browserTarget": "aw-ui-angular-library:build",
+            "compodoc": false,
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": "projects/aw-ui-angular-library/.storybook",
+            "browserTarget": "aw-ui-angular-library:build",
+            "compodoc": false,
+            "outputDir": "storybook-static"
+          }
+        }
+      }
+    }
+  }
+}
